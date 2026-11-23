@@ -33,6 +33,7 @@
 }
 *,*::before,*::after{box-sizing:inherit}
 html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 90px)}
+main{display:block;overflow-x:clip}
 body{margin:0;background:var(--bg);color:var(--text);font-family:var(--body);font-size:1.0625rem;line-height:1.6;-webkit-font-smoothing:antialiased}
 img{max-width:100%;display:block}
 a{color:inherit}
@@ -45,7 +46,9 @@ p{margin:0 0 1rem}
 
 /* buttons */
 .btn{display:inline-flex;align-items:center;gap:.55rem;font:600 1rem/1 var(--body);text-decoration:none;padding:1rem 1.5rem;border-radius:999px;border:2px solid transparent;cursor:pointer;transition:transform .2s, background .2s, color .2s}
-.btn-glove{background:var(--glove);color:#0B3440}
+.btn-glove{background:var(--glove);color:#0B3440;position:relative;overflow:hidden;isolation:isolate}
+.btn-glove::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.75) 50%,transparent 70%);transform:translateX(-130%);transition:transform .75s ease}
+.btn-glove:hover::after{transform:translateX(130%)}
 .btn-glove:hover{background:#FFD25A;transform:translateY(-2px)}
 .btn-line{border-color:currentColor;color:var(--text);background:transparent}
 .btn-line:hover{background:var(--text);color:var(--bg)}
@@ -62,7 +65,12 @@ p{margin:0 0 1rem}
 header.site{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px)}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:41;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(10px)}
 header.site .wrap{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;min-height:96px}
-.brand img{height:76px;width:auto}
+.brand img{height:76px;width:auto;transition:height .3s}
+header.site{transition:box-shadow .3s}
+header.site.scrolled{box-shadow:0 10px 30px -18px rgba(11,52,64,.5)}
+header.site.scrolled .brand img{height:60px}
+header.site .wrap{transition:min-height .3s}
+header.site.scrolled .wrap{min-height:78px}
 nav.main ul{list-style:none;margin:0;padding:0;display:flex;gap:.25rem;align-items:center}
 nav.main a,nav.main button{font:500 .98rem var(--body);color:var(--text);text-decoration:none;background:none;border:0;padding:.6rem .8rem;border-radius:8px;cursor:pointer;display:flex;align-items:center;gap:.3rem}
 nav.main a:hover,nav.main button:hover{background:var(--rinse)}
@@ -97,6 +105,23 @@ nav.main a:hover,nav.main button:hover{background:var(--rinse)}
 .wipe-hint{position:absolute;left:1.1rem;bottom:1.1rem;display:flex;align-items:center;gap:.5rem;background:rgba(255,255,255,.92);color:#0B3440;font-size:.88rem;font-weight:600;padding:.55rem .9rem;border-radius:999px;transition:opacity .5s;pointer-events:none}
 .wipe-hint svg{width:18px;height:18px}
 .wipe-hint.hide{opacity:0}
+.hero-visual{position:relative}
+.bubble{position:absolute;border-radius:50%;pointer-events:none;z-index:3;
+  background:radial-gradient(circle at 32% 28%,rgba(255,255,255,.95) 0 7%,rgba(255,255,255,.2) 18%,rgba(150,220,228,.16) 50%,rgba(255,196,236,.22) 72%,rgba(255,255,255,.7) 100%);
+  box-shadow:inset -4px -6px 14px rgba(120,200,210,.35),inset 3px 4px 10px rgba(255,255,255,.7),0 10px 24px -12px rgba(21,82,99,.4);
+  animation:bob 7s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translate(0,0)}33%{transform:translate(6px,-16px)}66%{transform:translate(-5px,-8px)}}
+.ring{position:absolute;left:-46px;bottom:-46px;width:158px;height:158px;border-radius:50%;background:var(--surface);box-shadow:0 18px 40px -20px rgba(11,52,64,.55);z-index:4;display:grid;place-items:center}
+.ring svg{position:absolute;inset:0;width:100%;height:100%;animation:spin 22s linear infinite}
+.ring svg text{font:700 11.5px var(--body);letter-spacing:.14em;fill:var(--text)}
+.ring img{width:62px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.glint{opacity:0;transform-box:fill-box;transform-origin:center}
+.wipe-frame.shine .glint{animation:glint 2.4s ease-in-out infinite}
+.wipe-frame.shine .glint:nth-of-type(2){animation-delay:.6s}
+.wipe-frame.shine .glint:nth-of-type(3){animation-delay:1.2s}
+.wipe-frame.shine .glint:nth-of-type(4){animation-delay:1.7s}
+@keyframes glint{0%,100%{opacity:0;transform:scale(.3) rotate(0)}45%{opacity:1;transform:scale(1) rotate(45deg)}70%{opacity:0;transform:scale(.4) rotate(90deg)}}
 .hero .mop-deco{position:absolute;right:-30px;top:30px;width:200px;opacity:.12;pointer-events:none}
 
 /* trust ribbon */
@@ -126,8 +151,12 @@ section.block{padding:6.5rem 0}
 .svc-list button:hover .dot{border-color:var(--teal)}
 .svc-panel{position:sticky;top:110px;background:var(--surface);border-radius:28px;overflow:hidden;border:1px solid var(--line)}
 .svc-panel .ph{aspect-ratio:4/3;overflow:hidden;position:relative}
-.svc-panel .ph img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;opacity:0;transform:scale(1.04);transition:opacity .5s,transform 1.2s}
-.svc-panel .ph img.on{opacity:1;transform:none}
+.svc-panel .ph img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;clip-path:inset(0 100% 0 0);transform:scale(1.06);z-index:0}
+.svc-panel .ph img.prev{clip-path:inset(0 0 0 0);z-index:1;transform:none}
+.svc-panel .ph img.on{clip-path:inset(0 0 0 0);z-index:2;transform:none;transition:clip-path .8s cubic-bezier(.7,0,.2,1),transform 1.6s ease}
+.svc-panel .ph::after{content:"";position:absolute;top:0;bottom:0;left:0;width:6px;background:var(--glove);z-index:3;opacity:0;box-shadow:0 0 18px rgba(242,194,58,.8)}
+.svc-panel .ph.swipe::after{animation:squeegee .8s cubic-bezier(.7,0,.2,1)}
+@keyframes squeegee{0%{left:0;opacity:1}90%{opacity:1}100%{left:100%;opacity:0}}
 .svc-panel .txt{padding:2rem 2.1rem 2.2rem}
 .svc-panel .txt h3{font-size:1.7rem;margin-bottom:.75rem}
 .svc-panel .txt p{color:var(--muted)}
@@ -138,6 +167,11 @@ section.block{padding:6.5rem 0}
 .svc-also a{text-decoration:none;font-weight:600;font-size:.95rem;padding:.55rem 1rem;border:1.5px solid var(--line);border-radius:999px}
 .svc-also a:hover{border-color:var(--teal);background:var(--rinse)}
 
+/* marquee */
+.marquee{background:var(--glove);color:#0B3440;transform:rotate(-1.6deg);margin:0 -3% -2.4rem;padding:1.05rem 0;position:relative;z-index:3;overflow:hidden;box-shadow:0 14px 30px -18px rgba(11,52,64,.5)}
+.mq-track{display:flex;gap:2.2rem;width:max-content;align-items:center;animation:mq 34s linear infinite;font:400 clamp(1.5rem,2.8vw,2.3rem)/1 var(--head);white-space:nowrap}
+.mq-track svg{width:26px;height:26px;flex:none;color:var(--teal)}
+@keyframes mq{to{transform:translateX(-50%)}}
 /* steps */
 .steps{background:var(--deep);color:#E3F1F2;position:relative;overflow:hidden}
 .steps .sec-head .kicker{color:var(--glove)}
@@ -145,6 +179,12 @@ section.block{padding:6.5rem 0}
 .steps-track{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:2.5rem}
 .steps-track .trail{position:absolute;left:4%;right:4%;top:34px;height:40px;width:92%;pointer-events:none}
 .step{position:relative}
+.steps-track.in .step .num{animation:fillnum .6s forwards}
+.steps-track.in .step:nth-child(3) .num{animation-delay:.5s}
+.steps-track.in .step:nth-child(4) .num{animation-delay:1s}
+@keyframes fillnum{to{background:var(--glove);border-color:var(--glove);color:#0B3440}}
+.trail .draw{stroke-dasharray:1;stroke-dashoffset:1}
+.steps-track.in .trail .draw{transition:stroke-dashoffset 1.6s ease;stroke-dashoffset:0}
 .step .num{width:70px;height:70px;border-radius:50%;background:var(--deep);border:2px solid #2D6B79;display:grid;place-items:center;font:400 2rem var(--head);color:var(--glove);margin-bottom:1.75rem;position:relative;z-index:1}
 .step h3{font-size:1.65rem;margin-bottom:.85rem;color:#fff}
 .step p{color:#A9C8CC;font-size:1rem}
@@ -159,6 +199,8 @@ section.block{padding:6.5rem 0}
 .arch{border-radius:999px 999px 28px 28px;overflow:hidden;aspect-ratio:4/5;position:relative}
 .arch img{width:100%;height:100%;object-fit:cover}
 .arch-wrap{position:relative}
+.peek{position:absolute;left:-34px;top:38%;width:170px;height:170px;border-radius:50%;overflow:hidden;border:7px solid var(--bg);box-shadow:0 18px 34px -18px rgba(11,52,64,.6)}
+.peek img{width:100%;height:100%;object-fit:cover}
 .arch-wrap .badge{position:absolute;right:-22px;bottom:48px;width:150px;height:150px;border-radius:50%;background:var(--glove);color:#0B3440;display:grid;place-items:center;text-align:center;font:400 1.05rem/1.15 var(--head);padding:1.25rem;box-shadow:0 18px 30px -18px rgba(11,52,64,.6)}
 .arch-wrap .badge b{display:block;font-size:2.1rem;font-weight:400}
 .why h2{font-size:clamp(2.2rem,4vw,3.3rem);margin-bottom:1.5rem}
@@ -207,6 +249,8 @@ form.quote input:focus,form.quote textarea:focus{outline:none;border-color:var(-
 form.quote textarea{min-height:120px;resize:vertical}
 form.quote .btn{width:100%;justify-content:center;margin-top:.5rem}
 form.quote .note{font-size:.88rem;margin:1rem 0 0;color:#CFE6E8;min-height:1.3em}
+form.quote .bubble{z-index:0}
+form.quote > *:not(.bubble){position:relative;z-index:1}
 form.quote .mop-in{position:absolute;right:-40px;top:-30px;width:180px;opacity:.1;filter:brightness(0) invert(1);pointer-events:none}
 
 /* footer */
@@ -244,6 +288,10 @@ footer.site .bottom a{color:#fff;font-weight:600}
   .hero .wrap,.svc,.why .grid,.areas .grid,.contact .grid,.sec-head{grid-template-columns:1fr}
   .wipe-frame{border-radius:120px 22px 22px 22px;aspect-ratio:1/.92}
   .hero .mop-deco{display:none}
+  .ring{left:auto;right:-8px;bottom:-40px;width:126px;height:126px}
+  .ring img{width:48px}
+  .peek{left:-10px;width:130px;height:130px}
+  .marquee{margin-bottom:-1rem}
   .svc-panel{position:relative;top:0}
   .steps-track{grid-template-columns:1fr;gap:2rem}
   .steps-track .trail{display:none}
@@ -271,6 +319,9 @@ footer.site .bottom a{color:#fff;font-weight:600}
   *{animation:none !important;transition:none !important;scroll-behavior:auto !important}
   .rv{opacity:1;transform:none}
   .fog{display:none}
+  .svc-panel .ph img{clip-path:none;opacity:0}
+  .svc-panel .ph img.on{opacity:1}
+  .trail .draw{stroke-dashoffset:0}
 }
 </style>
 </head>
@@ -341,29 +392,45 @@ footer.site .bottom a{color:#fff;font-weight:600}
       </ul>
     </div>
 
+    <div class="hero-visual">
+    <span class="bubble" style="width:64px;height:64px;right:-24px;top:-22px"></span>
+    <span class="bubble" style="width:30px;height:30px;right:60px;top:-46px;animation-duration:5.5s;animation-delay:-2s"></span>
+    <span class="bubble" style="width:44px;height:44px;left:42%;bottom:-24px;animation-duration:8s;animation-delay:-4s"></span>
+    <span class="bubble" style="width:22px;height:22px;left:-34px;top:30%;animation-duration:6s;animation-delay:-1s"></span>
     <div class="wipe-frame" id="wipe">
-      <svg viewBox="0 0 1600 1068" preserveAspectRatio="xMidYMid slice" role="img" aria-label="A bright, freshly cleaned kitchen with white cabinets and wood floors">
+      <svg viewBox="0 0 1000 1080" preserveAspectRatio="xMidYMid slice" role="img" aria-label="A bright, freshly cleaned kitchen with white cabinets and wood floors">
         <defs>
           <filter id="haze" x="-5%" y="-5%" width="110%" height="110%">
             <feGaussianBlur stdDeviation="7"/>
             <feColorMatrix type="matrix" values=".55 .25 .1 0 .06  .2 .6 .1 0 .06  .2 .25 .45 0 .05  0 0 0 1 0"/>
           </filter>
-          <mask id="clean-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="1600" height="1068">
-            <rect width="1600" height="1068" fill="#fff"/>
-            <path class="sweep" pathLength="1" d="M-80 820 C 240 560, 420 980, 760 640 S 1180 260, 1700 330" fill="none" stroke="#000" stroke-width="300" stroke-linecap="round"/>
+          <mask id="clean-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="1000" height="1080">
+            <rect width="1000" height="1080" fill="#fff"/>
+            <path class="sweep" pathLength="1" d="M-80 800 C 150 560, 280 940, 500 660 S 780 250, 1100 300" fill="none" stroke="#000" stroke-width="240" stroke-linecap="round"/>
             <g id="dabs"></g>
           </mask>
         </defs>
-        <image href="images/hero-kitchen.jpg" width="1600" height="1068" preserveAspectRatio="xMidYMid slice"/>
+        <image href="images/hero-kitchen.jpg" width="1000" height="1080" preserveAspectRatio="xMidYMid slice"/>
         <g class="fog" id="fog" mask="url(#clean-mask)">
-          <image href="images/hero-kitchen.jpg" width="1600" height="1068" preserveAspectRatio="xMidYMid slice" filter="url(#haze)"/>
-          <rect width="1600" height="1068" fill="#C9C2AE" opacity=".28"/>
+          <image href="images/hero-kitchen.jpg" width="1000" height="1080" preserveAspectRatio="xMidYMid slice" filter="url(#haze)"/>
+          <rect width="1000" height="1080" fill="#C9C2AE" opacity=".28"/>
           <g fill="#8E8673" opacity=".18">
-            <ellipse cx="300" cy="300" rx="120" ry="60"/><ellipse cx="1180" cy="760" rx="160" ry="70"/><ellipse cx="860" cy="200" rx="90" ry="40"/><ellipse cx="520" cy="900" rx="110" ry="45"/><ellipse cx="1400" cy="520" rx="80" ry="38"/>
+            <ellipse cx="200" cy="300" rx="100" ry="50"/><ellipse cx="760" cy="780" rx="120" ry="55"/><ellipse cx="560" cy="190" rx="80" ry="36"/><ellipse cx="300" cy="930" rx="90" ry="40"/><ellipse cx="880" cy="520" rx="70" ry="34"/>
           </g>
+        </g>
+        <g fill="#fff">
+          <path class="glint" d="M300 330 L310 360 L340 370 L310 380 L300 410 L290 380 L260 370 L290 360Z"/>
+          <path class="glint" d="M720 560 L728 584 L752 592 L728 600 L720 624 L712 600 L688 592 L712 584Z"/>
+          <path class="glint" d="M560 820 L566 838 L584 844 L566 850 L560 868 L554 850 L536 844 L554 838Z"/>
+          <path class="glint" d="M840 220 L850 250 L880 260 L850 270 L840 300 L830 270 L800 260 L830 250Z"/>
         </g>
       </svg>
       <div class="wipe-hint" id="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 3l7 7M4 20c3 0 5-1 7-4l3-3-3-3-3 3c-3 2-4 4-4 7z"/></svg>Move across the photo to finish the clean</div>
+    </div>
+    <div class="ring" aria-hidden="true">
+      <svg viewBox="0 0 160 160"><defs><path id="circ" d="M80 80 m-60 0 a60 60 0 1 1 120 0 a60 60 0 1 1 -120 0"/></defs><text><textPath href="#circ">A CLEANING FRIEND YOU CAN TRUST ✦ A CLEANING FRIEND YOU CAN TRUST ✦</textPath></text></svg>
+      <img src="images/favicon.png" alt="">
+    </div>
     </div>
   </div>
 </section>
@@ -420,6 +487,8 @@ footer.site .bottom a{color:#fff;font-weight:600}
   </div>
 </section>
 
+<div class="marquee" aria-hidden="true"><div class="mq-track"><span>Deep Cleaning</span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1l2.6 8.4L23 12l-8.4 2.6L12 23l-2.6-8.4L1 12l8.4-2.6z"/></svg><span>Standard Cleaning</span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1l2.6 8.4L23 12l-8.4 2.6L12 23l-2.6-8.4L1 12l8.4-2.6z"/></svg><span>Move-In / Move-Out Cleans</span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1l2.6 8.4L23 12l-8.4 2.6L12 23l-2.6-8.4L1 12l8.4-2.6z"/></svg><span>Airbnb Cleans</span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1l2.6 8.4L23 12l-8.4 2.6L12 23l-2.6-8.4L1 12l8.4-2.6z"/></svg><span>Post Construction Cleaning</span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1l2.6 8.4L23 12l-8.4 2.6L12 23l-2.6-8.4L1 12l8.4-2.6z"/></svg><span>Cleaning for Seniors</span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1l2.6 8.4L23 12l-8.4 2.6L12 23l-2.6-8.4L1 12l8.4-2.6z"/></svg><span>Commercial Cleaning</span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1l2.6 8.4L23 12l-8.4 2.6L12 23l-2.6-8.4L1 12l8.4-2.6z"/></svg><span>Deep Cleaning</span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1l2.6 8.4L23 12l-8.4 2.6L12 23l-2.6-8.4L1 12l8.4-2.6z"/></svg><span>Standard Cleaning</span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1l2.6 8.4L23 12l-8.4 2.6L12 23l-2.6-8.4L1 12l8.4-2.6z"/></svg><span>Move-In / Move-Out Cleans</span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1l2.6 8.4L23 12l-8.4 2.6L12 23l-2.6-8.4L1 12l8.4-2.6z"/></svg><span>Airbnb Cleans</span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1l2.6 8.4L23 12l-8.4 2.6L12 23l-2.6-8.4L1 12l8.4-2.6z"/></svg><span>Post Construction Cleaning</span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1l2.6 8.4L23 12l-8.4 2.6L12 23l-2.6-8.4L1 12l8.4-2.6z"/></svg><span>Cleaning for Seniors</span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1l2.6 8.4L23 12l-8.4 2.6L12 23l-2.6-8.4L1 12l8.4-2.6z"/></svg><span>Commercial Cleaning</span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1l2.6 8.4L23 12l-8.4 2.6L12 23l-2.6-8.4L1 12l8.4-2.6z"/></svg></div></div>
+
 <!-- STEPS -->
 <section class="block steps" id="book">
   <img class="mop-bg" src="images/favicon.png" alt="" aria-hidden="true">
@@ -428,8 +497,8 @@ footer.site .bottom a{color:#fff;font-weight:600}
       <div><span class="kicker">Keeping your home neat &amp; tidy</span><h2>Don’t wait! Book your cleaning online today</h2></div>
       <p>Three simple steps between you and a fresh, sparkling home.</p>
     </div>
-    <ol class="steps-track" style="list-style:none;padding:0;margin:0">
-      <svg class="trail" viewBox="0 0 1000 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0 20 C 160 0, 330 40, 500 20 S 840 0, 1000 20" fill="none" stroke="#2D6B79" stroke-width="2" stroke-dasharray="6 9"/></svg>
+    <ol class="steps-track" id="stepsTrack" style="list-style:none;padding:0;margin:0">
+      <svg class="trail" viewBox="0 0 1000 40" preserveAspectRatio="none" aria-hidden="true"><defs><mask id="trailMask" maskUnits="userSpaceOnUse" x="0" y="0" width="1000" height="40"><path class="draw" pathLength="1" d="M0 20 C 160 0, 330 40, 500 20 S 840 0, 1000 20" fill="none" stroke="#fff" stroke-width="8"/></mask></defs><path mask="url(#trailMask)" d="M0 20 C 160 0, 330 40, 500 20 S 840 0, 1000 20" fill="none" stroke="#F2C23A" stroke-opacity=".7" stroke-width="2" stroke-dasharray="6 9"/></svg>
       <li class="step rv">
         <div class="num">1</div>
         <h3>Choose your cleaning service</h3>
@@ -459,6 +528,7 @@ footer.site .bottom a{color:#fff;font-weight:600}
   <div class="wrap grid">
     <div class="arch-wrap rv">
       <div class="arch"><img src="images/why-choose-linen.jpg" alt="Neatly folded fresh towels on wooden shelves" loading="lazy"></div>
+      <div class="peek"><img src="images/standard-cleaning.jpg" alt="" loading="lazy"></div>
       <div class="badge"><span><b>100%</b>satisfaction guarantee</span></div>
     </div>
     <div class="rv">
@@ -533,6 +603,8 @@ footer.site .bottom a{color:#fff;font-weight:600}
     </div>
     <form class="quote rv" id="quoteForm" novalidate>
       <img class="mop-in" src="images/favicon.png" alt="" aria-hidden="true">
+      <span class="bubble" style="width:46px;height:46px;right:28px;bottom:90px"></span>
+      <span class="bubble" style="width:22px;height:22px;right:90px;bottom:150px;animation-delay:-3s"></span>
       <h3>Request a free quote!</h3>
       <div class="row">
         <div class="f"><label for="qn">Name</label><input id="qn" name="name" autocomplete="name" required></div>
@@ -624,15 +696,17 @@ footer.site .bottom a{color:#fff;font-weight:600}
   var NS='http://www.w3.org/2000/svg',count=0,last=null,done=false;
   if(reduce){fog.classList.add('gone');hint.classList.add('hide');}
   function toSvg(e){var p=svg.createSVGPoint();p.x=e.clientX;p.y=e.clientY;return p.matrixTransform(svg.getScreenCTM().inverse());}
-  function dab(x,y){var c=document.createElementNS(NS,'circle');c.setAttribute('cx',x);c.setAttribute('cy',y);c.setAttribute('r',115);c.setAttribute('fill','#000');dabs.appendChild(c);count++;}
+  function dab(x,y){var c=document.createElementNS(NS,'circle');c.setAttribute('cx',x);c.setAttribute('cy',y);c.setAttribute('r',85);c.setAttribute('fill','#000');dabs.appendChild(c);count++;}
   function wipe(e){
     if(done)return;
     var p=toSvg(e);
     if(last){var dx=p.x-last.x,dy=p.y-last.y,d=Math.hypot(dx,dy);if(d<45)return;var n=Math.min(6,Math.floor(d/60));for(var i=1;i<=n;i++)dab(last.x+dx*i/(n+1),last.y+dy*i/(n+1));}
     dab(p.x,p.y);last=p;
     if(count>8)hint.classList.add('hide');
-    if(count>70){done=true;fog.classList.add('gone');}
+    if(count>55)finish();
   }
+  function finish(){if(done)return;done=true;fog.classList.add('gone');hint.classList.add('hide');setTimeout(function(){frame.classList.add('shine')},700);}
+  if(reduce)done=true; else setTimeout(finish,6500);
   frame.addEventListener('pointermove',wipe);
   frame.addEventListener('pointerdown',wipe);
   frame.addEventListener('pointerleave',function(){last=null});
@@ -646,9 +720,15 @@ footer.site .bottom a{color:#fff;font-weight:600}
   ];
   var tabs=document.querySelectorAll('.svc-list button'),imgs=document.querySelectorAll('.svc-panel .ph img');
   var T=document.getElementById('svc-title'),D=document.getElementById('svc-desc'),L=document.getElementById('svc-link');
+  var cur=0,ph=document.querySelector('.svc-panel .ph');
   function show(i){
+    if(i===cur)return;
     tabs.forEach(function(b,j){b.setAttribute('aria-selected',j===i)});
-    imgs.forEach(function(im,j){im.classList.toggle('on',j===i)});
+    imgs.forEach(function(im){im.classList.remove('prev')});
+    imgs[cur].classList.remove('on');imgs[cur].classList.add('prev');
+    void imgs[i].offsetWidth;imgs[i].classList.add('on');
+    ph.classList.remove('swipe');void ph.offsetWidth;ph.classList.add('swipe');
+    cur=i;
     T.textContent=data[i].t;D.textContent=data[i].d;L.href=data[i].l;L.textContent=data[i].lt;
   }
   tabs.forEach(function(b,i){
@@ -668,11 +748,16 @@ footer.site .bottom a{color:#fff;font-weight:600}
     note.textContent='Your email app is opening with your request. Send it and we will get back to you as soon as possible.';
   });
 
+  /* header on scroll */
+  var hd=document.querySelector('header.site');
+  window.addEventListener('scroll',function(){hd.classList.toggle('scrolled',window.scrollY>40)},{passive:true});
+
   /* scroll reveal */
   if(!reduce&&'IntersectionObserver' in window){
     var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}})},{threshold:.15});
+    io.observe(document.getElementById('stepsTrack'));
     document.querySelectorAll('.rv').forEach(function(el,i){el.style.transitionDelay=(el.classList.contains('step')?(Array.prototype.indexOf.call(el.parentNode.children,el)-1)*120:0)+'ms';io.observe(el)});
-  } else document.querySelectorAll('.rv').forEach(function(el){el.classList.add('in')});
+  } else {document.querySelectorAll('.rv').forEach(function(el){el.classList.add('in')});document.getElementById('stepsTrack').classList.add('in');}
 })();
 </script>
 </body>
