@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Edmonton’s Trusted Home Cleaning Experts | SuzySev Cleaning</title>
+<meta name="description" content="Need home cleaning in Edmonton? SuzySev Cleaning offers deep, standard, and move-in/move-out cleans. Book online for a spotless home today!">
+<meta name="theme-color" content="#155263">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gloock&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --teal:#155263; --deep:#0B3440; --rinse:#DCEEEF; --paper:#F5FAFA; --glove:#F2C23A; --white:#FFFFFF;
+  --bg:var(--paper); --surface:#FFFFFF; --text:#123C47; --muted:#46666E; --line:#C9DFE1; --on-teal:#FFFFFF;
+  --head:"Gloock", "Rockwell", "Georgia", serif;
+  --body:"Hanken Grotesk", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  color-scheme:light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#08242C; --surface:#0E2F38; --text:#E3F1F2; --muted:#9FBEC3; --line:#1E4C57; --rinse:#123E49; --paper:#08242C;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#08242C; --surface:#0E2F38; --text:#E3F1F2; --muted:#9FBEC3; --line:#1E4C57; --rinse:#123E49; --paper:#08242C;
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 90px)}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--body);font-size:1.0625rem;line-height:1.6;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3{font-family:var(--head);font-weight:400;line-height:1.08;margin:0;letter-spacing:-.01em}
+p{margin:0 0 1rem}
+:focus-visible{outline:3px solid var(--glove);outline-offset:3px;border-radius:4px}
+.wrap{width:min(1200px,100% - 2.5rem);margin-inline:auto}
+.skip{position:absolute;left:-999px;top:0;background:var(--glove);color:#0B3440;padding:.6rem 1rem;z-index:100}
+.skip:focus{left:1rem;top:1rem}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:.55rem;font:600 1rem/1 var(--body);text-decoration:none;padding:1rem 1.5rem;border-radius:999px;border:2px solid transparent;cursor:pointer;transition:transform .2s, background .2s, color .2s}
+.btn-glove{background:var(--glove);color:#0B3440}
+.btn-glove:hover{background:#FFD25A;transform:translateY(-2px)}
+.btn-line{border-color:currentColor;color:var(--text);background:transparent}
+.btn-line:hover{background:var(--text);color:var(--bg)}
+.btn svg{width:18px;height:18px}
+
+/* utility bar */
+.util{background:var(--deep);color:#CFE6E8;font-size:.875rem}
+.util .wrap{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:.55rem 0;flex-wrap:wrap}
+.util a{color:#fff;text-decoration:none;font-weight:600}
+.util a:hover{text-decoration:underline}
+.util .contact{display:flex;gap:1.25rem}
+
+/* header */
+header.site{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:41;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(10px)}
+header.site .wrap{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;min-height:96px}
+.brand img{height:76px;width:auto}
+nav.main ul{list-style:none;margin:0;padding:0;display:flex;gap:.25rem;align-items:center}
+nav.main a,nav.main button{font:500 .98rem var(--body);color:var(--text);text-decoration:none;background:none;border:0;padding:.6rem .8rem;border-radius:8px;cursor:pointer;display:flex;align-items:center;gap:.3rem}
+nav.main a:hover,nav.main button:hover{background:var(--rinse)}
+.has-menu{position:relative}
+.has-menu button svg{width:12px;height:12px;transition:transform .2s}
+.menu{position:absolute;top:calc(100% + 6px);left:0;min-width:270px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:.5rem;box-shadow:0 18px 40px -20px rgba(11,52,64,.45);opacity:0;visibility:hidden;transform:translateY(6px);transition:.18s}
+.menu a{display:block !important;padding:.65rem .8rem !important}
+.has-menu:hover .menu,.has-menu:focus-within .menu,.has-menu.open .menu{opacity:1;visibility:visible;transform:none}
+.has-menu:hover button svg,.has-menu.open button svg{transform:rotate(180deg)}
+.head-cta{display:flex;align-items:center;gap:.75rem}
+.burger{display:none;background:none;border:1px solid var(--line);border-radius:10px;width:46px;height:46px;color:var(--text);cursor:pointer}
+.burger svg{width:22px;height:22px;margin:auto}
+
+/* hero */
+.hero{position:relative;overflow:hidden;padding:4.5rem 0 5rem}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.12fr;gap:3.5rem;align-items:center}
+.hero .welcome{display:inline-flex;align-items:center;gap:.6rem;font-weight:600;color:var(--teal);margin-bottom:1.25rem}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .hero .welcome{color:#8FD0D6}}
+.hero .welcome img{width:38px;height:auto}
+.hero h1{font-size:clamp(2.6rem,4.9vw,4.4rem);margin-bottom:1.5rem;max-width:13ch}
+.hero p.lead{font-size:1.15rem;color:var(--muted);max-width:46ch}
+.hero .actions{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:2rem}
+.areas-inline{margin-top:2.25rem;display:flex;flex-wrap:wrap;gap:.45rem;padding:0;list-style:none}
+.areas-inline li{font-size:.9rem;padding:.35rem .8rem;border-radius:999px;background:var(--rinse);color:var(--text)}
+
+.wipe-frame{position:relative;aspect-ratio:1/1.08;border-radius:220px 28px 28px 28px;overflow:hidden;background:#cfdcdc;box-shadow:0 40px 70px -40px rgba(11,52,64,.55);touch-action:pan-y}
+.wipe-frame svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.wipe-frame .sweep{stroke-dasharray:1;stroke-dashoffset:1;animation:sweep 1.9s .5s cubic-bezier(.6,.05,.25,1) forwards}
+@keyframes sweep{to{stroke-dashoffset:0}}
+.fog{transition:opacity 1.1s ease}
+.fog.gone{opacity:0}
+.wipe-hint{position:absolute;left:1.1rem;bottom:1.1rem;display:flex;align-items:center;gap:.5rem;background:rgba(255,255,255,.92);color:#0B3440;font-size:.88rem;font-weight:600;padding:.55rem .9rem;border-radius:999px;transition:opacity .5s;pointer-events:none}
+.wipe-hint svg{width:18px;height:18px}
+.wipe-hint.hide{opacity:0}
+.hero .mop-deco{position:absolute;right:-30px;top:30px;width:200px;opacity:.12;pointer-events:none}
+
+/* trust ribbon */
+.ribbon{background:var(--teal);color:var(--on-teal)}
+.ribbon ul{list-style:none;margin:0 auto;padding:1.4rem 0;display:grid;grid-template-columns:repeat(6,1fr);gap:1rem}
+.ribbon li{display:flex;align-items:center;gap:.65rem;font-weight:600;font-size:.95rem;line-height:1.25}
+.ribbon svg{flex:none;width:30px;height:30px;color:var(--glove)}
+
+/* sections */
+section.block{padding:6.5rem 0}
+.sec-head{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:end;margin-bottom:3.5rem}
+.sec-head .kicker{font-weight:600;color:var(--teal);display:block;margin-bottom:.75rem}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .sec-head .kicker{color:#8FD0D6}}
+.sec-head h2{font-size:clamp(2.2rem,4vw,3.4rem)}
+.sec-head p{color:var(--muted);max-width:48ch;margin:0}
+
+/* services */
+.svc{display:grid;grid-template-columns:.95fr 1.05fr;gap:3rem;align-items:start}
+.svc-list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.svc-list button{width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--line);color:var(--text);cursor:pointer;padding:1.5rem .25rem;display:grid;grid-template-columns:1fr auto;align-items:center;gap:1rem;font:400 clamp(1.5rem,2.4vw,2.05rem)/1.15 var(--head);transition:color .2s,padding .25s}
+.svc-list button small{display:block;font:500 .95rem var(--body);color:var(--muted);margin-top:.35rem}
+.svc-list button .dot{width:42px;height:42px;border-radius:50%;border:1.5px solid var(--line);display:grid;place-items:center;transition:.25s}
+.svc-list button .dot svg{width:16px;height:16px}
+.svc-list button[aria-selected="true"]{color:var(--teal);padding-left:1rem}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .svc-list button[aria-selected="true"]{color:#8FD0D6}}
+.svc-list button[aria-selected="true"] .dot{background:var(--glove);border-color:var(--glove);color:#0B3440}
+.svc-list button:hover .dot{border-color:var(--teal)}
+.svc-panel{position:sticky;top:110px;background:var(--surface);border-radius:28px;overflow:hidden;border:1px solid var(--line)}
+.svc-panel .ph{aspect-ratio:4/3;overflow:hidden;position:relative}
+.svc-panel .ph img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;opacity:0;transform:scale(1.04);transition:opacity .5s,transform 1.2s}
+.svc-panel .ph img.on{opacity:1;transform:none}
+.svc-panel .txt{padding:2rem 2.1rem 2.2rem}
+.svc-panel .txt h3{font-size:1.7rem;margin-bottom:.75rem}
+.svc-panel .txt p{color:var(--muted)}
+.svc-panel .txt a.more{font-weight:700;color:var(--teal);text-decoration-thickness:2px;text-underline-offset:5px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .svc-panel .txt a.more{color:#8FD0D6}}
+.svc-also{margin-top:2.25rem;display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}
+.svc-also span{color:var(--muted);font-weight:500;margin-right:.3rem}
+.svc-also a{text-decoration:none;font-weight:600;font-size:.95rem;padding:.55rem 1rem;border:1.5px solid var(--line);border-radius:999px}
+.svc-also a:hover{border-color:var(--teal);background:var(--rinse)}
+
+/* steps */
+.steps{background:var(--deep);color:#E3F1F2;position:relative;overflow:hidden}
+.steps .sec-head .kicker{color:var(--glove)}
+.steps .sec-head p{color:#A9C8CC}
+.steps-track{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:2.5rem}
+.steps-track .trail{position:absolute;left:4%;right:4%;top:34px;height:40px;width:92%;pointer-events:none}
+.step{position:relative}
+.step .num{width:70px;height:70px;border-radius:50%;background:var(--deep);border:2px solid #2D6B79;display:grid;place-items:center;font:400 2rem var(--head);color:var(--glove);margin-bottom:1.75rem;position:relative;z-index:1}
+.step h3{font-size:1.65rem;margin-bottom:.85rem;color:#fff}
+.step p{color:#A9C8CC;font-size:1rem}
+.steps .cta-row{margin-top:3.5rem;display:flex;gap:1rem;flex-wrap:wrap;align-items:center;padding-top:2.5rem;border-top:1px solid #1E4C57}
+.steps .cta-row h3{font-size:clamp(1.6rem,2.6vw,2.2rem);flex:1 1 320px;color:#fff}
+.steps .btn-line{color:#fff}
+.steps .btn-line:hover{background:#fff;color:var(--deep)}
+.steps .mop-bg{position:absolute;right:-60px;bottom:-40px;width:380px;opacity:.06;filter:brightness(0) invert(1);pointer-events:none}
+
+/* why */
+.why .grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:4.5rem;align-items:center}
+.arch{border-radius:999px 999px 28px 28px;overflow:hidden;aspect-ratio:4/5;position:relative}
+.arch img{width:100%;height:100%;object-fit:cover}
+.arch-wrap{position:relative}
+.arch-wrap .badge{position:absolute;right:-22px;bottom:48px;width:150px;height:150px;border-radius:50%;background:var(--glove);color:#0B3440;display:grid;place-items:center;text-align:center;font:400 1.05rem/1.15 var(--head);padding:1.25rem;box-shadow:0 18px 30px -18px rgba(11,52,64,.6)}
+.arch-wrap .badge b{display:block;font-size:2.1rem;font-weight:400}
+.why h2{font-size:clamp(2.2rem,4vw,3.3rem);margin-bottom:1.5rem}
+.why .lead{font-size:1.2rem;font-weight:600;color:var(--text)}
+.why p{color:var(--muted)}
+.facts{list-style:none;padding:0;margin:2rem 0;display:grid;grid-template-columns:1fr 1fr;gap:.9rem 1.5rem}
+.facts li{display:flex;gap:.7rem;align-items:flex-start;font-weight:600;color:var(--text)}
+.facts svg{flex:none;width:22px;height:22px;color:var(--teal);margin-top:2px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .facts svg{color:#8FD0D6}}
+
+/* areas */
+.areas{background:var(--rinse)}
+.areas .grid{display:grid;grid-template-columns:1fr 1.15fr;gap:3.5rem;align-items:center}
+.areas h2{font-size:clamp(2.2rem,4vw,3.3rem);margin-bottom:1.25rem}
+.areas p{color:var(--muted);max-width:44ch}
+.area-list{list-style:none;padding:0;margin:2rem 0 0;display:grid;gap:.1rem}
+.area-list li{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid color-mix(in srgb,var(--teal) 22%,transparent);padding:.9rem 0;font:400 1.35rem var(--head)}
+.area-list a{font:600 .92rem var(--body);color:var(--teal);text-underline-offset:4px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .area-list a{color:#8FD0D6}}
+.map{background:var(--surface);border-radius:28px;padding:1rem;border:1px solid var(--line)}
+.map svg{width:100%;height:auto;display:block}
+.map .pin circle.pulse{transform-origin:center;transform-box:fill-box;animation:pulse 2.6s infinite}
+@keyframes pulse{0%{transform:scale(.6);opacity:.7}100%{transform:scale(2.4);opacity:0}}
+.map figcaption{font-size:.82rem;color:var(--muted);text-align:right;padding:.25rem .5rem 0}
+
+/* contact */
+.contact .grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.contact h2{font-size:clamp(2.2rem,4vw,3.3rem);margin-bottom:1.25rem}
+.contact p{color:var(--muted)}
+.ways{list-style:none;padding:0;margin:2rem 0 0;display:grid;gap:.75rem}
+.ways a{display:flex;align-items:center;gap:1rem;text-decoration:none;padding:1rem 1.2rem;border-radius:16px;background:var(--surface);border:1px solid var(--line);transition:border-color .2s}
+.ways a:hover{border-color:var(--teal)}
+.ways .ic{width:46px;height:46px;border-radius:50%;background:var(--rinse);display:grid;place-items:center;color:var(--teal);flex:none}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .ways .ic{color:#8FD0D6}}
+.ways .ic svg{width:20px;height:20px}
+.ways small{display:block;color:var(--muted);font-size:.85rem}
+.ways strong{font-size:1.1rem}
+form.quote{background:var(--teal);color:#fff;border-radius:28px;padding:2.4rem;position:relative;overflow:hidden}
+form.quote h3{font-size:2rem;margin-bottom:1.5rem;color:#fff}
+form.quote label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.4rem}
+form.quote .row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+form.quote .f{margin-bottom:1rem}
+form.quote input,form.quote textarea{width:100%;font:500 1rem var(--body);padding:.9rem 1rem;border-radius:12px;border:1.5px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:#fff}
+form.quote input::placeholder,form.quote textarea::placeholder{color:rgba(255,255,255,.55)}
+form.quote input:focus,form.quote textarea:focus{outline:none;border-color:var(--glove);background:rgba(255,255,255,.14)}
+form.quote textarea{min-height:120px;resize:vertical}
+form.quote .btn{width:100%;justify-content:center;margin-top:.5rem}
+form.quote .note{font-size:.88rem;margin:1rem 0 0;color:#CFE6E8;min-height:1.3em}
+form.quote .mop-in{position:absolute;right:-40px;top:-30px;width:180px;opacity:.1;filter:brightness(0) invert(1);pointer-events:none}
+
+/* footer */
+footer.site{background:var(--deep);color:#B8D3D6;padding:5rem 0 0;font-size:.97rem}
+footer.site .cols{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1.2fr;gap:2.5rem}
+footer.site .flogo{width:210px;filter:brightness(0) invert(1);margin-bottom:1.25rem}
+footer.site h4{font:400 1.25rem var(--head);color:#fff;margin:0 0 1rem}
+footer.site ul{list-style:none;padding:0;margin:0;display:grid;gap:.55rem}
+footer.site a{color:#B8D3D6;text-decoration:none}
+footer.site a:hover{color:#fff;text-decoration:underline}
+footer.site a.btn-glove,footer.site a.btn-glove:hover{color:#0B3440;text-decoration:none}
+footer.site .bottom{margin-top:4rem;border-top:1px solid #1E4C57;padding:1.5rem 0 2rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;font-size:.88rem}
+footer.site .bottom a{color:#fff;font-weight:600}
+
+/* mobile contact bar (from original site’s Call / Text / Email) */
+.mbar{display:none}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .8s ease, transform .8s ease}
+.rv.in{opacity:1;transform:none}
+
+@media (max-width:1080px){
+  nav.main{display:none}
+  .burger{display:grid}
+  nav.main.open{display:block;position:absolute;top:100%;left:0;right:0;background:var(--surface);border-bottom:1px solid var(--line);padding:1rem 1.25rem 1.5rem;max-height:calc(100dvh - 140px);overflow:auto}
+  nav.main.open ul{flex-direction:column;align-items:stretch}
+  nav.main.open .menu{position:static;opacity:1;visibility:visible;transform:none;box-shadow:none;border:0;padding:0 0 0 1rem;display:none}
+  nav.main.open .has-menu.open .menu{display:block}
+  .ribbon ul{grid-template-columns:repeat(3,1fr)}
+  footer.site .cols{grid-template-columns:1fr 1fr 1fr}
+  footer.site .cols > div:first-child{grid-column:1/-1}
+}
+@media (max-width:900px){
+  .hero{padding:2.5rem 0 3.5rem}
+  .hero .wrap,.svc,.why .grid,.areas .grid,.contact .grid,.sec-head{grid-template-columns:1fr}
+  .wipe-frame{border-radius:120px 22px 22px 22px;aspect-ratio:1/.92}
+  .hero .mop-deco{display:none}
+  .svc-panel{position:relative;top:0}
+  .steps-track{grid-template-columns:1fr;gap:2rem}
+  .steps-track .trail{display:none}
+  .arch-wrap{max-width:460px}
+  .arch-wrap .badge{right:-6px}
+  section.block{padding:4.5rem 0}
+  .head-cta .btn{display:none}
+  .util .tag{display:none}
+}
+@media (max-width:640px){
+  .ribbon ul{grid-template-columns:1fr 1fr}
+  .facts{grid-template-columns:1fr}
+  form.quote .row{grid-template-columns:1fr}
+  form.quote{padding:1.75rem}
+  footer.site .cols{grid-template-columns:1fr 1fr}
+  .brand img{height:52px}
+  .util .contact{width:100%;justify-content:space-between}
+  .mbar{display:grid;grid-template-columns:repeat(3,1fr);position:fixed;left:0;right:0;bottom:0;z-index:45;background:var(--deep);padding-bottom:env(safe-area-inset-bottom,0px)}
+  .mbar a{color:#fff;text-decoration:none;text-align:center;padding:.8rem 0;font-weight:600;font-size:.9rem;display:flex;flex-direction:column;align-items:center;gap:.2rem}
+  .mbar a svg{width:20px;height:20px;color:var(--glove)}
+  .mbar a + a{border-left:1px solid #1E4C57}
+  footer.site{padding-bottom:70px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none !important;transition:none !important;scroll-behavior:auto !important}
+  .rv{opacity:1;transform:none}
+  .fog{display:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="util">
+  <div class="wrap">
+    <span class="tag">Proudly serving Edmonton, St. Albert, Sherwood Park, Beaumont and Fort Saskatchewan</span>
+    <span class="contact">
+      <span>Call <a href="tel:7809950075">780-995-0075</a></span>
+      <span>Text <a href="sms:5878045505">587-804-5505</a></span>
+    </span>
+  </div>
+</div>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="https://www.suzysevcleaning.com/" aria-label="SuzySev Cleaning Services Ltd. home"><img src="images/suzysev-logo.png" alt="SuzySev Cleaning Services Ltd. – A cleaning friend you can trust" width="900" height="593"></a>
+    <nav class="main" id="nav" aria-label="Main">
+      <ul>
+        <li><a href="https://www.suzysevcleaning.com/commercial-cleaning-edmonton">Commercial Cleaning Edmonton</a></li>
+        <li><a href="https://www.suzysevcleaning.com/about">About Us</a></li>
+        <li class="has-menu">
+          <button type="button" aria-expanded="false">We Offer <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l4 4 4-4"/></svg></button>
+          <div class="menu">
+            <a href="https://www.suzysevcleaning.com/deep-cleaning-edmonton">Deep Cleaning</a>
+            <a href="https://www.suzysevcleaning.com/move-in-move-out-cleaning-edmonton">Move In Move Out Cleaning</a>
+            <a href="https://www.suzysevcleaning.com/airbnb-cleaning-edmonton">AirBnB Cleaning</a>
+            <a href="https://www.suzysevcleaning.com/post-construction-cleaning-edmonton">Post Construction Cleaning</a>
+            <a href="https://www.suzysevcleaning.com/cleaning-seniors-edmonton">Cleaning for Seniors</a>
+            <a href="https://www.suzysevcleaning.com/commercial-cleaning-edmonton">Commercial Cleaning Edmonton</a>
+          </div>
+        </li>
+        <li class="has-menu">
+          <button type="button" aria-expanded="false">Locations <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l4 4 4-4"/></svg></button>
+          <div class="menu">
+            <a href="https://www.suzysevcleaning.com/st-albert-house-cleaning">St. Albert House Cleaning</a>
+            <a href="https://www.suzysevcleaning.com/sherwood-park-house-cleaning">Sherwood Park House Cleaning</a>
+          </div>
+        </li>
+        <li><a href="https://www.suzysevcleaning.com/contact">Contact Us</a></li>
+      </ul>
+    </nav>
+    <div class="head-cta">
+      <a class="btn btn-glove" href="https://www.suzysevcleaning.com/appointment-form">Book Now</a>
+      <button class="burger" type="button" aria-label="Open menu" aria-controls="nav" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h10"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- HERO -->
+<section class="hero">
+  <img class="mop-deco" src="images/favicon.png" alt="" aria-hidden="true">
+  <div class="wrap">
+    <div>
+      <span class="welcome"><img src="images/favicon.png" alt="" aria-hidden="true">Welcome to SuzySev Cleaning Services</span>
+      <h1>Edmonton’s Trusted Home Cleaning Experts</h1>
+      <p class="lead">At SuzySev Cleaning, we believe that a clean home is the foundation for a happy, healthy life. We specialize in delivering reliable and professional residential cleaning services designed to meet the unique needs of our clients.</p>
+      <div class="actions">
+        <a class="btn btn-glove" href="https://www.suzysevcleaning.com/appointment-form">Book Now</a>
+        <a class="btn btn-line" href="#quote">Request a free quote</a>
+      </div>
+      <ul class="areas-inline" aria-label="Areas we serve">
+        <li>Edmonton</li><li>St. Albert</li><li>Sherwood Park</li><li>Beaumont</li><li>Fort Saskatchewan</li>
+      </ul>
+    </div>
+
+    <div class="wipe-frame" id="wipe">
+      <svg viewBox="0 0 1600 1068" preserveAspectRatio="xMidYMid slice" role="img" aria-label="A bright, freshly cleaned kitchen with white cabinets and wood floors">
+        <defs>
+          <filter id="haze" x="-5%" y="-5%" width="110%" height="110%">
+            <feGaussianBlur stdDeviation="7"/>
+            <feColorMatrix type="matrix" values=".55 .25 .1 0 .06  .2 .6 .1 0 .06  .2 .25 .45 0 .05  0 0 0 1 0"/>
+          </filter>
+          <mask id="clean-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="1600" height="1068">
+            <rect width="1600" height="1068" fill="#fff"/>
+            <path class="sweep" pathLength="1" d="M-80 820 C 240 560, 420 980, 760 640 S 1180 260, 1700 330" fill="none" stroke="#000" stroke-width="300" stroke-linecap="round"/>
+            <g id="dabs"></g>
+          </mask>
+        </defs>
+        <image href="images/hero-kitchen.jpg" width="1600" height="1068" preserveAspectRatio="xMidYMid slice"/>
+        <g class="fog" id="fog" mask="url(#clean-mask)">
+          <image href="images/hero-kitchen.jpg" width="1600" height="1068" preserveAspectRatio="xMidYMid slice" filter="url(#haze)"/>
+          <rect width="1600" height="1068" fill="#C9C2AE" opacity=".28"/>
+          <g fill="#8E8673" opacity=".18">
+            <ellipse cx="300" cy="300" rx="120" ry="60"/><ellipse cx="1180" cy="760" rx="160" ry="70"/><ellipse cx="860" cy="200" rx="90" ry="40"/><ellipse cx="520" cy="900" rx="110" ry="45"/><ellipse cx="1400" cy="520" rx="80" ry="38"/>
+          </g>
+        </g>
+      </svg>
+      <div class="wipe-hint" id="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 3l7 7M4 20c3 0 5-1 7-4l3-3-3-3-3 3c-3 2-4 4-4 7z"/></svg>Move across the photo to finish the clean</div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST RIBBON -->
+<div class="ribbon">
+  <ul class="wrap">
+    <li><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="20" height="24" rx="3"/><path d="M11 11h10M11 16h10M11 21h6"/></svg>Licensed</li>
+    <li><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3l11 4v8c0 7-5 12-11 14C10 27 5 22 5 15V7z"/><path d="M11 16l4 4 6-7"/></svg>Insured</li>
+    <li><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="14" width="18" height="14" rx="3"/><path d="M11 14V10a5 5 0 0110 0v4"/></svg>Bonded</li>
+    <li><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="11" r="5"/><path d="M6 28c1-6 5-9 10-9s9 3 10 9"/></svg>Covered by WCB</li>
+    <li><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4l3.5 7.2 7.9 1.1-5.7 5.6 1.3 7.9L16 22l-7 3.8 1.3-7.9-5.7-5.6 7.9-1.1z"/></svg>100% satisfaction guarantee</li>
+    <li><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 28s-10-6-10-14a6 6 0 0110-4 6 6 0 0110 4c0 8-10 14-10 14z"/></svg>Female-led, Edmonton owned</li>
+  </ul>
+</div>
+
+<!-- SERVICES -->
+<section class="block services" id="services">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div><span class="kicker">What we offer</span><h2>Our services</h2></div>
+      <p>From a top-to-bottom deep clean to keeping your home fresh week after week, choose the clean that fits your home and your schedule.</p>
+    </div>
+
+    <div class="svc">
+      <ul class="svc-list rv" role="tablist" aria-label="Cleaning services">
+        <li><button role="tab" aria-selected="true" aria-controls="svc-panel" data-i="0"><span>Deep Cleaning<small>A detailed top-to-bottom clean</small></span><span class="dot"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M6 4h6v6"/></svg></span></button></li>
+        <li><button role="tab" aria-selected="false" aria-controls="svc-panel" data-i="1"><span>Standard Cleaning<small>Weekly, bi-weekly and monthly</small></span><span class="dot"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M6 4h6v6"/></svg></span></button></li>
+        <li><button role="tab" aria-selected="false" aria-controls="svc-panel" data-i="2"><span>Move-In / Move-Out Cleans<small>Ready for your next chapter</small></span><span class="dot"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M6 4h6v6"/></svg></span></button></li>
+        <li><button role="tab" aria-selected="false" aria-controls="svc-panel" data-i="3"><span>Airbnb Cleans<small>Guest-ready, every turnover</small></span><span class="dot"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M6 4h6v6"/></svg></span></button></li>
+      </ul>
+
+      <div class="svc-panel rv" id="svc-panel" role="tabpanel" aria-live="polite">
+        <div class="ph">
+          <img class="on" src="images/deep-cleaning.jpg" alt="Spotless stovetop after a deep clean in Edmonton">
+          <img src="images/standard-cleaning.jpg" alt="Dusting a round bathroom mirror during a standard house cleaning in Edmonton" loading="lazy">
+          <img src="images/move-in-move-out.jpg" alt="Sweeping a wood floor during a move-in and move-out clean in Edmonton" loading="lazy">
+          <img src="images/airbnb-cleaning.jpg" alt="Freshly made bed with clean linens in an Edmonton Airbnb" loading="lazy">
+        </div>
+        <div class="txt">
+          <h3 id="svc-title">Deep Cleaning</h3>
+          <p id="svc-desc">Our deep cleaning service provides a top-to-bottom, detailed clean, ensuring that every corner of your home is spotless. Perfect for seasonal cleans or a thorough once-over clean before a big event.</p>
+          <a class="more" id="svc-link" href="https://www.suzysevcleaning.com/deep-cleaning-edmonton">Learn more about deep cleaning</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="svc-also rv">
+      <span>We also offer</span>
+      <a href="https://www.suzysevcleaning.com/post-construction-cleaning-edmonton">Post Construction Cleaning</a>
+      <a href="https://www.suzysevcleaning.com/cleaning-seniors-edmonton">Cleaning for Seniors</a>
+      <a href="https://www.suzysevcleaning.com/commercial-cleaning-edmonton">Commercial Cleaning Edmonton</a>
+    </div>
+  </div>
+</section>
+
+<!-- STEPS -->
+<section class="block steps" id="book">
+  <img class="mop-bg" src="images/favicon.png" alt="" aria-hidden="true">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div><span class="kicker">Keeping your home neat &amp; tidy</span><h2>Don’t wait! Book your cleaning online today</h2></div>
+      <p>Three simple steps between you and a fresh, sparkling home.</p>
+    </div>
+    <ol class="steps-track" style="list-style:none;padding:0;margin:0">
+      <svg class="trail" viewBox="0 0 1000 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0 20 C 160 0, 330 40, 500 20 S 840 0, 1000 20" fill="none" stroke="#2D6B79" stroke-width="2" stroke-dasharray="6 9"/></svg>
+      <li class="step rv">
+        <div class="num">1</div>
+        <h3>Choose your cleaning service</h3>
+        <p>Select the cleaning service that best meets your needs from our comprehensive options.</p>
+      </li>
+      <li class="step rv">
+        <div class="num">2</div>
+        <h3>Schedule your cleaning</h3>
+        <p>Fill out our simple online booking form with details about your home and cleaning preferences. Our team will confirm your quote and arrange a convenient time.</p>
+      </li>
+      <li class="step rv">
+        <div class="num">3</div>
+        <h3>Sit back &amp; let us handle the rest</h3>
+        <p>Our professional house cleaners arrive on time, ready to give your home the SuzySev Cleaning touch. Relax, and let us handle the hard work.</p>
+      </li>
+    </ol>
+    <div class="cta-row rv">
+      <h3>Ready for the SuzySev Cleaning touch?</h3>
+      <a class="btn btn-glove" href="https://clienthub.getjobber.com/client_hubs/6e2416d1-6d4c-4056-bf73-0b6a624db969/public/work_request/new?source=social_media">Request a Quote Today</a>
+      <a class="btn btn-line" href="https://www.suzysevcleaning.com/appointment-form">Book Now</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="block why" id="why">
+  <div class="wrap grid">
+    <div class="arch-wrap rv">
+      <div class="arch"><img src="images/why-choose-linen.jpg" alt="Neatly folded fresh towels on wooden shelves" loading="lazy"></div>
+      <div class="badge"><span><b>100%</b>satisfaction guarantee</span></div>
+    </div>
+    <div class="rv">
+      <h2>Why choose SuzySev Cleaning?</h2>
+      <p class="lead">What sets SuzySev apart is our unwavering commitment to CARE.</p>
+      <p>We prioritize customer satisfaction by going above and beyond to deliver exceptional service, while fostering long-term relationships built on trust. Our dedication to maintaining the highest standards in home cleaning ensures that your prized possession is in reliable hands.</p>
+      <p>Whether you’re looking for a one-time deep clean or regular cleaning services, we’re committed to making your home shine.</p>
+      <ul class="facts">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-6.5"/></svg>Edmonton owned and operated</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-6.5"/></svg>Female-led maid cleaning service</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-6.5"/></svg>Licensed, insured and bonded</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-6.5"/></svg>Covered by WCB</li>
+      </ul>
+      <a class="btn btn-line" href="https://www.suzysevcleaning.com/about">More About Us</a>
+    </div>
+  </div>
+</section>
+
+<!-- AREAS -->
+<section class="block areas" id="areas">
+  <div class="wrap grid">
+    <div class="rv">
+      <h2>Proudly serving Edmonton and nearby</h2>
+      <p>Reliable, professional residential cleaning across Edmonton and the communities around it.</p>
+      <ul class="area-list">
+        <li>Edmonton</li>
+        <li>St. Albert <a href="https://www.suzysevcleaning.com/st-albert-house-cleaning">St. Albert house cleaning</a></li>
+        <li>Sherwood Park <a href="https://www.suzysevcleaning.com/sherwood-park-house-cleaning">Sherwood Park house cleaning</a></li>
+        <li>Beaumont</li>
+        <li>Fort Saskatchewan</li>
+      </ul>
+    </div>
+    <figure class="map rv" style="margin:0">
+      <svg viewBox="0 0 600 460" role="img" aria-label="Stylized map of Edmonton, St. Albert, Sherwood Park, Beaumont and Fort Saskatchewan">
+        <defs>
+          <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse"><path d="M30 0H0V30" fill="none" stroke="#155263" stroke-opacity=".07"/></pattern>
+        </defs>
+        <rect width="600" height="460" rx="18" fill="url(#grid)"/>
+        <!-- North Saskatchewan River -->
+        <path d="M20 330 C 110 300, 150 350, 220 300 S 300 220, 360 230 S 430 180, 470 140 S 540 70, 590 40" fill="none" stroke="#7FBFC6" stroke-width="14" stroke-linecap="round" opacity=".55"/>
+        <!-- Anthony Henday ring -->
+        <ellipse cx="270" cy="250" rx="125" ry="105" fill="none" stroke="#155263" stroke-opacity=".25" stroke-width="3" stroke-dasharray="2 8" stroke-linecap="round"/>
+        <!-- routes -->
+        <g fill="none" stroke="#155263" stroke-opacity=".35" stroke-width="2" stroke-dasharray="5 7">
+          <path d="M270 250 L170 150"/><path d="M270 250 L410 240"/><path d="M270 250 L290 395"/><path d="M270 250 L470 110"/>
+        </g>
+        <g class="pin" font-family="Hanken Grotesk, Arial, sans-serif" font-weight="700" fill="#155263">
+          <g><circle class="pulse" cx="270" cy="250" r="16" fill="#F2C23A" opacity=".6"/><circle cx="270" cy="250" r="13" fill="#155263"/><circle cx="270" cy="250" r="5" fill="#F2C23A"/><text x="290" y="276" font-size="22" font-family="Gloock, Georgia, serif" font-weight="400">Edmonton</text></g>
+          <g><circle cx="170" cy="150" r="9" fill="#155263"/><text x="80" y="128" font-size="16">St. Albert</text></g>
+          <g><circle cx="410" cy="240" r="9" fill="#155263"/><text x="425" y="246" font-size="16">Sherwood Park</text></g>
+          <g><circle cx="290" cy="395" r="9" fill="#155263"/><text x="306" y="401" font-size="16">Beaumont</text></g>
+          <g><circle cx="470" cy="110" r="9" fill="#155263"/><text x="380" y="86" font-size="16">Fort Saskatchewan</text></g>
+        </g>
+      </svg>
+      <figcaption>Stylized map, not to scale</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="block contact" id="quote">
+  <div class="wrap grid">
+    <div class="rv">
+      <h2>Cleaning services you can trust in Edmonton</h2>
+      <p>At SuzySev Cleaning Services Ltd., we are dedicated to providing exceptional residential cleaning solutions across Edmonton and surrounding areas. With a focus on quality, reliability, and customer satisfaction, you can trust us to keep your home in perfect condition.</p>
+      <p>Contact us today to schedule your cleaning service and experience the SuzySev Cleaning difference!</p>
+      <ul class="ways">
+        <li><a href="tel:7809950075"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 005 5L15 12l5 2v4a2 2 0 01-2 2A16 16 0 013 5a2 2 0 012-2"/></svg></span><span><small>Call</small><strong>780-995-0075</strong></span></a></li>
+        <li><a href="sms:5878045505"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/></svg></span><span><small>Text</small><strong>587-804-5505</strong></span></a></li>
+        <li><a href="mailto:suzysevcleaning@gmail.com"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span><span><small>Email</small><strong>SuzySevCleaning@gmail.com</strong></span></a></li>
+      </ul>
+    </div>
+    <form class="quote rv" id="quoteForm" novalidate>
+      <img class="mop-in" src="images/favicon.png" alt="" aria-hidden="true">
+      <h3>Request a free quote!</h3>
+      <div class="row">
+        <div class="f"><label for="qn">Name</label><input id="qn" name="name" autocomplete="name" required></div>
+        <div class="f"><label for="qp">Phone</label><input id="qp" name="phone" type="tel" autocomplete="tel"></div>
+      </div>
+      <div class="f"><label for="qe">Email</label><input id="qe" name="email" type="email" autocomplete="email" required></div>
+      <div class="f"><label for="qm">Message</label><textarea id="qm" name="message" placeholder="Tell us about your home and the clean you need"></textarea></div>
+      <button class="btn btn-glove" type="submit">Send my quote request</button>
+      <p class="note" id="formNote" role="status"></p>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <img class="flogo" src="images/suzysev-logo.png" alt="SuzySev Cleaning Services Ltd." loading="lazy">
+        <p>Edmonton owned and operated, female-led home cleaning. Licensed, insured, bonded and covered by WCB.</p>
+        <a class="btn btn-glove" href="https://www.suzysevcleaning.com/appointment-form" style="margin-top:.5rem">Book Now</a>
+      </div>
+      <div>
+        <h4>Pages</h4>
+        <ul>
+          <li><a href="https://www.suzysevcleaning.com/">Home</a></li>
+          <li><a href="https://www.suzysevcleaning.com/about">About Us</a></li>
+          <li><a href="https://www.suzysevcleaning.com/specialities">We Offer</a></li>
+          <li><a href="https://www.suzysevcleaning.com/commercial-cleaning-edmonton">Commercial Cleaning</a></li>
+          <li><a href="https://www.suzysevcleaning.com/contact">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="https://www.suzysevcleaning.com/deep-cleaning-edmonton">Deep Cleaning</a></li>
+          <li><a href="https://www.suzysevcleaning.com/move-in-move-out-cleaning-edmonton">Move In Move Out</a></li>
+          <li><a href="https://www.suzysevcleaning.com/airbnb-cleaning-edmonton">AirBnB Cleaning</a></li>
+          <li><a href="https://www.suzysevcleaning.com/post-construction-cleaning-edmonton">Post Construction</a></li>
+          <li><a href="https://www.suzysevcleaning.com/cleaning-seniors-edmonton">Cleaning for Seniors</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Locations</h4>
+        <ul>
+          <li><a href="https://www.suzysevcleaning.com/st-albert-house-cleaning">St. Albert</a></li>
+          <li><a href="https://www.suzysevcleaning.com/sherwood-park-house-cleaning">Sherwood Park</a></li>
+          <li>Edmonton</li>
+          <li>Beaumont</li>
+          <li>Fort Saskatchewan</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>Call <a href="tel:7809950075">780-995-0075</a></li>
+          <li>Text <a href="sms:5878045505">587-804-5505</a></li>
+          <li><a href="mailto:suzysevcleaning@gmail.com">SuzySevCleaning@gmail.com</a></li>
+          <li><a href="https://www.suzysevcleaning.com/">SuzySevCleaning.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="bottom">
+      <span>All Rights Reserved | Suzysev Cleaning Services Ltd. © 2026</span>
+      <span>Design by <a href="https://cleaningdigital.ca/">Cleaning Digital</a>.</span>
+    </div>
+  </div>
+</footer>
+
+<nav class="mbar" aria-label="Quick contact">
+  <a href="tel:7809950075"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 005 5L15 12l5 2v4a2 2 0 01-2 2A16 16 0 013 5a2 2 0 012-2"/></svg>Call</a>
+  <a href="sms:5878045505"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/></svg>Text</a>
+  <a href="mailto:suzysevcleaning@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>Email</a>
+</nav>
+
+<script>
+(function(){
+  /* mobile nav + dropdowns */
+  var nav=document.getElementById('nav'),burger=document.querySelector('.burger');
+  burger.addEventListener('click',function(){var o=nav.classList.toggle('open');burger.setAttribute('aria-expanded',o)});
+  document.querySelectorAll('.has-menu > button').forEach(function(b){
+    b.addEventListener('click',function(){var li=b.parentElement;var o=li.classList.toggle('open');b.setAttribute('aria-expanded',o)});
+  });
+
+  /* hero wipe-to-clean */
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var frame=document.getElementById('wipe'),svg=frame.querySelector('svg'),dabs=document.getElementById('dabs'),fog=document.getElementById('fog'),hint=document.getElementById('hint');
+  var NS='http://www.w3.org/2000/svg',count=0,last=null,done=false;
+  if(reduce){fog.classList.add('gone');hint.classList.add('hide');}
+  function toSvg(e){var p=svg.createSVGPoint();p.x=e.clientX;p.y=e.clientY;return p.matrixTransform(svg.getScreenCTM().inverse());}
+  function dab(x,y){var c=document.createElementNS(NS,'circle');c.setAttribute('cx',x);c.setAttribute('cy',y);c.setAttribute('r',115);c.setAttribute('fill','#000');dabs.appendChild(c);count++;}
+  function wipe(e){
+    if(done)return;
+    var p=toSvg(e);
+    if(last){var dx=p.x-last.x,dy=p.y-last.y,d=Math.hypot(dx,dy);if(d<45)return;var n=Math.min(6,Math.floor(d/60));for(var i=1;i<=n;i++)dab(last.x+dx*i/(n+1),last.y+dy*i/(n+1));}
+    dab(p.x,p.y);last=p;
+    if(count>8)hint.classList.add('hide');
+    if(count>70){done=true;fog.classList.add('gone');}
+  }
+  frame.addEventListener('pointermove',wipe);
+  frame.addEventListener('pointerdown',wipe);
+  frame.addEventListener('pointerleave',function(){last=null});
+
+  /* services tabs */
+  var data=[
+    {t:'Deep Cleaning',d:'Our deep cleaning service provides a top-to-bottom, detailed clean, ensuring that every corner of your home is spotless. Perfect for seasonal cleans or a thorough once-over clean before a big event.',l:'https://www.suzysevcleaning.com/deep-cleaning-edmonton',lt:'Learn more about deep cleaning'},
+    {t:'Standard Cleaning (Weekly, Bi-Weekly, and Monthly)',d:'Our routine cleaning service is perfect for maintaining the cleanliness and comfort of your home on a regular basis. We offer flexible scheduling and customized cleaning plans to meet your lifestyle and needs.',l:'https://www.suzysevcleaning.com/contact',lt:'Contact us about standard cleaning'},
+    {t:'Move-In / Move-Out Cleans',d:'Moving in or out of a home? Our move-in and move-out cleaning service ensures your space is immaculate for new occupants or ready for your next chapter. We cover everything from floors to fixtures, leaving nothing overlooked.',l:'https://www.suzysevcleaning.com/move-in-move-out-cleaning-edmonton',lt:'Learn more about move-in / move-out cleans'},
+    {t:'Airbnb Cleans',d:'Airbnb hosts in Edmonton can rely on our Airbnb cleaning service to make sure their properties are guest-ready. We focus on the details: fresh linens, spotless spaces, and an inviting atmosphere that ensures positive reviews.',l:'https://www.suzysevcleaning.com/airbnb-cleaning-edmonton',lt:'Learn more about Airbnb cleans'}
+  ];
+  var tabs=document.querySelectorAll('.svc-list button'),imgs=document.querySelectorAll('.svc-panel .ph img');
+  var T=document.getElementById('svc-title'),D=document.getElementById('svc-desc'),L=document.getElementById('svc-link');
+  function show(i){
+    tabs.forEach(function(b,j){b.setAttribute('aria-selected',j===i)});
+    imgs.forEach(function(im,j){im.classList.toggle('on',j===i)});
+    T.textContent=data[i].t;D.textContent=data[i].d;L.href=data[i].l;L.textContent=data[i].lt;
+  }
+  tabs.forEach(function(b,i){
+    b.addEventListener('click',function(){show(i)});
+    b.addEventListener('mouseenter',function(){if(window.matchMedia('(hover:hover)').matches)show(i)});
+    b.addEventListener('keydown',function(e){if(e.key==='ArrowDown'||e.key==='ArrowUp'){e.preventDefault();var n=(i+(e.key==='ArrowDown'?1:3))%4;tabs[n].focus();show(n);}});
+  });
+
+  /* quote form: opens the visitor’s email app addressed to SuzySev */
+  var f=document.getElementById('quoteForm'),note=document.getElementById('formNote');
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var n=f.name.value.trim(),em=f.email.value.trim();
+    if(!n||!em||em.indexOf('@')<1){note.textContent='Add your name and a valid email so we can reply to you.';(n?f.email:f.name).focus();return;}
+    var body='Name: '+n+'\nEmail: '+em+'\nPhone: '+f.phone.value.trim()+'\n\n'+f.message.value.trim();
+    window.location.href='mailto:suzysevcleaning@gmail.com?subject='+encodeURIComponent('Free quote request from '+n)+'&body='+encodeURIComponent(body);
+    note.textContent='Your email app is opening with your request. Send it and we will get back to you as soon as possible.';
+  });
+
+  /* scroll reveal */
+  if(!reduce&&'IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}})},{threshold:.15});
+    document.querySelectorAll('.rv').forEach(function(el,i){el.style.transitionDelay=(el.classList.contains('step')?(Array.prototype.indexOf.call(el.parentNode.children,el)-1)*120:0)+'ms';io.observe(el)});
+  } else document.querySelectorAll('.rv').forEach(function(el){el.classList.add('in')});
+})();
+</script>
+</body>
+</html>
